@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Inventory Management</title>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="/css/styles copy.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="galleryScripts.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@1,700&display=swap');
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid" style="background-color: #ffffff30;">
+      <a class="navbar-brand" style="font-size:21px;" ref="#">
+        <img src="images/scooter.svg" alt="" width="50" height="35" class="d-inline-block align-text-top"
+          style="fill: #3654ff !important;font-size: 18;">
+        Inventory Management
+      </a>
+    </div>
+  </nav>
+
+
+
+  <div class="container text-center">
+
+
+    <nav class="navbar bg-light">
+      <div class="container-fluid">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+
+    <div class="row" id="threeColumn">
+      <!--
+      <div class="col-sm distanceInput">
+        <h2 id="inputTitle">Distance</h2>
+
+        <p id="inputInstructions">Enter distance to destination</p>
+
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control rounded-1" id="inputTextBox" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-lg" style="border-color:#3654ff">
+          <span class="input-group-text rounded-1" id="inputTextBoxUnits">miles</span>
+        </div>
+
+      </div>
+      -->
+
+
+      <!--<div class="overflow-auto card "
+      style=" max-height: 480px; background-color: #e2e2e230; border-width: 2px;border-color: #eb5d2e4a;">
+-->
+
+      <div class="card mb-3 shadow-sm mb-5  rounded border " id="transportCard-0" style="max-width: 250px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="images/image.png" id="transportButtonImage" style="max-height: 100px;"
+              class="img-fluid rounded-start align-text" alt="...">
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title" id="transportButtonTitle">Item 1</h5>
+            <a class="stretched-link" id="transportButton-0"></a>
+            <p class="card-text" id="transportButtonText-0"></p>
+            <p class="card-text" id="transportButtonTextRange-0"></p>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!--
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    -->
+
+      <!--</div>-->
+
+
+
+
+
+
+
+
+
+
+      <!--
+      <div class="col-sm mainCard " id="fullCard" style="padding-top: 50px;">
+        <p></p>
+        <div class="card shadow " id="fullTransportCard"
+          style="width: 18rem;border-color: #3654ff !important;--bs-border-width: 3px;">
+          <img src="images/white.PNG" id="transportImage" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title" id="transportName">Select Transport</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" id="transportText" style="background-color: #e2e2e200"></li>
+              <li class="list-group-item" id="transportRangeText" style="background-color: #e2e2e200"></li>
+            </ul>
+
+            <a class="btn btn-primary" id="rentButton"
+              style="background-color: #3654ff;border-color: #e2e2e2; border-width:2px;">Rent Vehicle</a>
+
+          </div>
+        </div>
+      </div>
+    -->
+
+    </div>
+  </div>
+
+  <!-- Button for modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add New Item
+  </button>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Item - Item 1</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row g-0">
+
+            <div class="col-md-4">
+              <img src="..." class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+
+              <div class="form-group row">
+                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputCategory">
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputStatus">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputCount" class="col-sm-2 col-form-label">Count</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputCount">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputLimit" class="col-sm-2 col-form-label">Limit</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputLimit">
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
