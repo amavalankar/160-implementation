@@ -30,7 +30,7 @@ function App() {
     <div>
       <Navbar></Navbar>
       <div className='container'>
-        <h1>Text</h1>
+        <h1>Inventory</h1>
 
         <button className="btn btn-primary rounded-pill" onClick={handleShowAddModal}>
           Add Item
@@ -47,7 +47,7 @@ function App() {
         <AddModal showModal={showAddModal} onClose={() => setShowAddModal(false)} />
         <EditModal showModal={showEditModal} onClose={() => setShowEditModal(false)} />
       </div>
-      
+
     </div>
   );
 }

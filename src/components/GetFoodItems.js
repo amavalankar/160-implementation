@@ -65,15 +65,15 @@ export function FoodItemCards() {
                     <div key={index} className="col-6 col-md-3 gx-4">
                         <div className="p-3 rounded rounded-4 border border-2" style={{ backgroundColor: item.inStock ? 'white' : 'gray' }} id="compare-one">
                             {/*Add food item image here*/}
+
+                            {item.image_url && <img style={{ width: 125 }} src={item.image_url} alt={item.name} />}
                             <h2 className="text-primary fw-bold mb-1">
                                 {item.name}
                             </h2>
                             <h4>
                                 Qty: {item.quantity}
                             </h4>
-                            <h4>
-                                In stock: {item.inStock}
-                            </h4>
+                            {!item.inStock && <h4>Out of stock</h4>}
                         </div>
                     </div>
                 ))

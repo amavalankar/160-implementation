@@ -104,11 +104,19 @@ export default function AddModal(props) {
 
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
 
+              {/* Temporary way of inputting images through URL */}
+              <div className="form-floating mb-3">
+                <input type="text" className="form-control" name="image_url" />
+                <label htmlFor="image_url">Image URL</label>
+              </div>
+
               {allergenItems.map((allergen, index) => (
                 <AllergenBadge key={index} label={allergen} callback={removeAllergen} />
               ))}
 
               <hr />
+
+
 
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
               <button type='submit' className="btn btn-primary">Save changes</button>
@@ -129,7 +137,8 @@ function pushData(data) {
     limitPerDay: data.dailyLimit,
     limitPerPerson: data.personalLimit,
     name: data.name,
-    quantity: data.stock
+    quantity: data.stock,
+    image_url: data.image_url
   });
 }
 
