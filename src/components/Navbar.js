@@ -4,17 +4,17 @@ import AuthButton from './AuthButton';
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">My App</a>
+      <a className="navbar-brand" href="#">BNC</a>
 
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-          <a className="nav-link" href="#">Link 1</a>
+          <a className="nav-link" href="#">Database</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Link 2</a>
+          <a className="nav-link" href="#">Manage Listing</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Link 3</a>
+          <a className="nav-link" href="#">Data Analytics</a>
         </li>
       </ul>
 

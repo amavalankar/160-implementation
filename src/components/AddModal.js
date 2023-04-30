@@ -64,7 +64,7 @@ export default function AddModal(props) {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeSelf}></button>
           </div>
           <div className="modal-body">
-            <p>Modal body text goes here.</p>
+            <p></p>
 
             <form onSubmit={handleSubmit}>
               <div className="form-floating mb-3">
@@ -81,7 +81,7 @@ export default function AddModal(props) {
                 </div>
                 <div className="col">
                   <div className="form-floating mb-3">
-                    <input type="text" className="form-control" name="personalLimit" placeholder={props.personLimit} required />
+                    <input type="text" className="form-control" name="personalLimit" placeholder={props.personLimit} />
                     <label htmlFor="personalLimit">Limit Per Person (Optional)</label>
                   </div>
                 </div>
