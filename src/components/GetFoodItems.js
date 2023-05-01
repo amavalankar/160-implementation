@@ -63,10 +63,14 @@ export function FoodItemCards() {
             <div className="row">
                 {data.map((item, index) => (
                     <div key={index} className="col-6 col-md-3 gx-4 gy-4">
-                        <div className="shadow p-3 rounded rounded-4 border border-2" style={{ backgroundColor: item.inStock ? 'white' : '#ffabaf', width: 180, height: 230 }} id="compare-one">
-                            {/*Add food item image here*/}
+                        <div className="card shadow p-3 rounded rounded-4 border border-2" style={{ backgroundColor: item.inStock ? 'white' : '#ffabaf', width: 180, height: 230 }} id="compare-one">
 
-                            {item.image_url && <img style={{ width: 125 }} src={item.image_url} alt={item.name} />}
+                            {item.image_url && <div className={item.inStock ? "text-center border rounded rounded-3" : "text-center"} >
+
+                                {item.image_url && <img className="card-img-top card-img-bottom" style={{ width: 125, filter: !item.inStock ? "saturate(10%)" : "saturate(100%)", alignItems: "center", outline: 5 }} src={item.image_url} alt={item.name} />}
+
+                            </div>}
+
                             <h3 className="text-primary fw-bold mb-1" style={{ fontSize: 18 }}>
                                 {item.name}
                             </h3>

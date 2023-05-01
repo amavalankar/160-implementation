@@ -116,17 +116,15 @@ export default function AddModal(props) {
 
               <hr />
 
-
-
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
-              <button type='submit' className="btn btn-primary">Save changes</button>
+              <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
+              <button type='submit' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">Save changes</button>
             </form>
 
           </div>
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 

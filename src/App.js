@@ -52,13 +52,13 @@ function App() {
 
             <div className="row">
               <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} onClick={handleShowAddModal}>
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
                   Add Item
                 </button>
               </div>
 
               <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} onClick={handleShowEditModal}>
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
                   Edit Item
                 </button>
               </div>
@@ -66,14 +66,14 @@ function App() {
 
             <div className="row my-5">
               <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} >
-                  Upload Inventory
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
+                  Upload Items
                 </button>
               </div>
 
               <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} >
-                  Reset Inventory
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
+                  Inventory Properties
                 </button>
               </div>
             </div>
