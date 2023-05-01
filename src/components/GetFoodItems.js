@@ -71,9 +71,9 @@ export function FoodItemCards() {
                                 {item.name}
                             </h3>
 
-                            <h5>
+                            <h6>
                                 Qty: {item.quantity}
-                            </h5>
+                            </h6>
                             {!item.inStock && <h6>Out of stock</h6>}
 
                         </div>

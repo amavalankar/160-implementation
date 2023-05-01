@@ -28,14 +28,16 @@ function App() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <div>
+        <Navbar></Navbar>
+      </div>
 
       {/*Title text*/}
       <div className='container'>
         <div className="text-center">
           <div className="row">
             <div className="col">
-              <h1 className="text-center">Manage Inventory</h1>
+              <h1 className="text-center"> </h1>
             </div>
           </div>
         </div>
@@ -47,6 +49,7 @@ function App() {
 
           {/*Left button pannel */}
           <div className="col-3">
+
             <div className="row">
               <div className="my-2">
                 <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} onClick={handleShowAddModal}>
@@ -61,12 +64,42 @@ function App() {
               </div>
             </div>
 
+            <div className="row my-5">
+              <div className="my-2">
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} >
+                  Upload Inventory
+                </button>
+              </div>
 
+              <div className="my-2">
+                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18 }} >
+                  Reset Inventory
+                </button>
+              </div>
+            </div>
 
           </div>
 
+
+
+
+
           {/*Food item grid*/}
           <div className="col">
+
+            {/*Search and filter bar*/}
+            <nav class="navbar">
+              <div class="container-fluid">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                  <img src="https://cdn1.iconfinder.com/data/icons/round-web-icons/100/rwi-44-512.png" style={{ maxHeight: 40 }} alt="Filter"></img>
+
+                </form>
+              </div>
+            </nav>
+
+
             <div className="text-center" >
               <FoodItemCards />
             </div>
