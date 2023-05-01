@@ -34,10 +34,11 @@ function App() {
 
       {/*Title text*/}
       <div className='container'>
-        <div className="text-center">
+
+        <div className="">
           <div className="row">
             <div className="col">
-              <h1 className="text-center"> </h1>
+              <h1 className="" style={{ fontWeight: "220", fontSize: "55px", paddingBottom: "10px", borderBottom: "solid black 0.5px" }}> Inventory Management</h1>
             </div>
           </div>
         </div>
@@ -50,7 +51,7 @@ function App() {
           {/*Left button pannel */}
           <div className="col-3">
 
-            <div className="row">
+            <div className="row" style={{ paddingTop: "80px" }}>
               <div className="my-2">
                 <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
                   Add Item
@@ -64,7 +65,7 @@ function App() {
               </div>
             </div>
 
-            <div className="row my-5">
+            <div className="row my-5" style={{ paddingTop: "100px" }}>
               <div className="my-2">
                 <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
                   Upload Items
