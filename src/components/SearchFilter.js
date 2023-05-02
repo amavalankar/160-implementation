@@ -1,8 +1,16 @@
 import { useState } from 'react';
 
 export default function SearchFilter(props) {
-
+    const [items, setItems] = useState([]);
     const [query, setQuery] = useState(props.value);
+    const filtered = items
+    .filter(item => item !== null && item.name)
+    .filter(item => {
+      const query = query.toLowerCase();
+      return (
+        item.name?.toLowerCase().includes(query) || item.allergens.includes(query)
+      );
+    });
 
     function updateValue(event) {
         setQuery(event.target.value)

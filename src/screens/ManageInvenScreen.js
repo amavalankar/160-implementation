@@ -1,18 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import AuthButton from './components/AuthButton.js';
-import Navbar from './components/Navbar.js';
-import { FoodItemCards } from './components/GetFoodItems';
+import { FoodItemCards } from '../components/GetFoodItems';
 import { useState } from 'react';
-import EditModal from './components/EditModal';
-import AddModal from './components/AddModal';
-import SearchFilter from './components/SearchFilter';
+import EditModal from '../components/EditModal';
+import AddModal from '../components/AddModal';
+import SearchFilter from '../components/SearchFilter';
 
-function App() {
-  const [items, setItems] = useState([]);
+function ManageInvenScreen() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editItem, setEditItem] = useState('');
@@ -42,9 +40,6 @@ function App() {
 
   return (
     <div>
-      <div>
-        <Navbar></Navbar>
-      </div>
 
       {/*Title text*/}
       <div className='container mt-5'>
@@ -61,7 +56,7 @@ function App() {
 
 
         <div className="row">
-          {/* <div className="my-2">
+          <div className="my-2">
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
               Add Item
             </button>
@@ -73,7 +68,7 @@ function App() {
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
               Inventory Properties
             </button>
-          </div> */}
+          </div>
 
           <nav class="navbar">
             <SearchFilter callback={getSearchQuery} value={query} />
@@ -92,4 +87,4 @@ function App() {
   );
 }
 
-export default App;
+export default ManageInvenScreen;
