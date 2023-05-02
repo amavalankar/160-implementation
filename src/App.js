@@ -60,31 +60,27 @@ function App() {
 
 
         <div className="row">
-            <div className="my-2">
-              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
-                Add Item
-              </button>
+          <div className="my-2">
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
+              Add Item
+            </button>
 
-              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
-                Edit Item
-              </button>
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+              Scan Items
+            </button>
 
-              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
-                Scan Items
-              </button>
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+              Inventory Properties
+            </button>
+          </div>
 
-              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
-                Inventory Properties
-              </button>
-            </div>
+          <nav class="navbar">
+            <SearchFilter callback={getSearchQuery} value={query} />
+          </nav>
 
-            <nav class="navbar">
-              <SearchFilter callback={getSearchQuery} value={query} />
-            </nav>
-
-            <div className="text-center" >
-              <FoodItemCards searchFilter={query} edit={edit} />
-            </div>
+          <div className="text-center" >
+            <FoodItemCards searchFilter={query} edit={edit} />
+          </div>
         </div>
 
         <AddModal showModal={showAddModal} onClose={() => setShowAddModal(false)} />

@@ -12,14 +12,14 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-item nav-link" href="#">Home</a>
+            <a className="nav-item nav-link" href="#">Dashboard</a>
             <a className="nav-item nav-link active" href="#">Inventory</a>
             <a className="nav-item nav-link" href="#">Manage Listing</a>
             <a className="nav-item nav-link" href="#">Data Analytics</a>
           </div>
         </div>
       </div>
-      
+
     </nav>
   );
 }
