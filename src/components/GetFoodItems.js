@@ -1,15 +1,3 @@
-// import { collection, query, where, getDocs } from "firebase/firestore";
-
-// export default async function getItems() {
-//     const q = query(collection(db, "foodItems"));
-
-//     const querySnapshot = await getDocs(q);
-//     querySnapshot.forEach((doc) => {
-//       // doc.data() is never undefined for query doc snapshots
-//       console.log(doc.id, " => ", doc.data());
-//     });
-// }
-
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase/firebase.js';
 import { collection, onSnapshot } from "firebase/firestore";
@@ -29,9 +17,18 @@ export function FoodItemCards(props) {
             collection(db, "foodItems"),
             (snapshot) => {
                 console.log(snapshot)
-                const items = snapshot.docs.map((doc) => doc.data());
-                console.log(items)
-                setData(items);
+
+                const docList = [];
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const id = doc.id;
+
+                    docList.push({ id, ...data })
+                })
+
+                console.log(docList)
+                setData(docList);
 
             },
             (error) => {
@@ -70,14 +67,14 @@ export function FoodItemCards(props) {
     } else {
         if (doFilter) {
             const filteredItems = data.filter((item) => item.name.toLowerCase().includes(props.searchFilter.toLowerCase()))
-            return LocalItemList(filteredItems);
+            return LocalItemList(filteredItems, props);
         } else {
-            return LocalItemList(data);
+            return LocalItemList(data, props);
         }
     }
 }
 
-function LocalItemList(inputs) {
+function LocalItemList(inputs, props) {
     if (inputs.length === 0) {
         return (
             <div className="py-5 text-secondary">
@@ -90,9 +87,9 @@ function LocalItemList(inputs) {
     return (
         <div className="row mb-5">
             {inputs.map((item, index) => (
-                <FoodCard index={index} item={item} />
+                <FoodCard key={index} item={item} edit={props.edit} />
             ))
             }
-        </div >
+        </div>
     );
 }

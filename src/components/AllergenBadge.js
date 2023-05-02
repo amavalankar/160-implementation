@@ -8,7 +8,7 @@ export default function AllergenBadge(props) {
     }
 
     return (
-        <span class='badge rounded-pill text-bg-secondary fs-6 fw-normal px-2 m-1'>
+        <span class='badge rounded-pill text-bg-secondary fs-6 fw-normal px-2 mb-3'>
             {props.label} <a onClick={handleClick} ><XCircleFill /></a>
         </span>
     );

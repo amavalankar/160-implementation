@@ -102,13 +102,13 @@ export default function AddModal(props) {
                 </div>
               </div>
 
-              <InputMultiple onValueChange={getAllergens}></InputMultiple>
-
               {/* Temporary way of inputting images through URL */}
               <div className="form-floating mb-3">
                 <input type="text" className="form-control" name="image_url" />
                 <label htmlFor="image_url">Image URL</label>
               </div>
+
+              <InputMultiple onValueChange={getAllergens}></InputMultiple>
 
               {allergenItems.map((allergen, index) => (
                 <AllergenBadge key={index} label={allergen} callback={removeAllergen} />

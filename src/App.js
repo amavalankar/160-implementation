@@ -14,6 +14,7 @@ import SearchFilter from './components/SearchFilter';
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [editItem, setEditItem] = useState('');
   const [query, setQuery] = useState('');
 
   const handleShowAddModal = () => {
@@ -22,14 +23,20 @@ function App() {
     }
   }
 
-  const handleShowEditModal = () => {
+  const handleShowEditModal = (item) => {
     if (!showAddModal) {
+      setEditItem(item)
       setShowEditModal(true);
     }
   }
 
   const getSearchQuery = (input) => {
     setQuery(input)
+  }
+
+  const edit = (input) => {
+    console.log(input)
+    handleShowEditModal(input)
   }
 
   return (
@@ -39,7 +46,7 @@ function App() {
       </div>
 
       {/*Title text*/}
-      <div className='container'>
+      <div className='container mt-5'>
 
         <div className="">
           <div className="row">
@@ -76,12 +83,12 @@ function App() {
             </nav>
 
             <div className="text-center" >
-              <FoodItemCards searchFilter={query} />
+              <FoodItemCards searchFilter={query} edit={edit} />
             </div>
         </div>
 
         <AddModal showModal={showAddModal} onClose={() => setShowAddModal(false)} />
-        <EditModal showModal={showEditModal} onClose={() => setShowEditModal(false)} />
+        <EditModal showModal={showEditModal} editItem={editItem} onClose={() => setShowEditModal(false)} />
       </div>
 
     </div >
