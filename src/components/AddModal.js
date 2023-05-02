@@ -1,59 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import { useState } from 'react';
 import { addDoc, collection, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 
 export default function AddModal(props) {
-  // item's reference in Cloud Firestore DB.
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
+  const [itemName, setItemName] = useState('');
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     if (!allergenItems.includes(properValue)) {
       setAllergenItems([...allergenItems, properValue]);
-      console.log(allergenItems);
     }
   };
 
   const removeAllergen = (value) => {
-    var filteredItems = [];
-
-    allergenItems.forEach((item) => {
-      if (!(item == value)) {
-        filteredItems.push(item);
-      }
-    });
-
-    console.log(filteredItems)
-    setAllergenItems(filteredItems)
-  }
+    const filteredItems = allergenItems.filter((item) => item !== value);
+    setAllergenItems(filteredItems);
+  };
 
   const closeSelf = () => {
     setAllergenItems([]);
-
+    setItemName('');
     props.onClose();
-  }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const form = e.target;
     const formData = new FormData(form);
-
     const formJson = Object.fromEntries(formData.entries());
     formJson.allergens = allergenItems;
-    pushData(formJson);
-    console.log(formJson)
-
+    formJson.name = itemName || formJson.name;
+    await pushData(formJson);
     props.onClose();
-
     setAllergenItems([]);
-    e.target.reset();
-  }
+    setItemName('');
+    form.reset();
+  };
+
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    const imageUrl = URL.createObjectURL(image);
+    const formData = new FormData();
+    formData.append('image', image);
+    const response = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${process.env.REACT_APP_GOOGLE_CLOUD_VISION_API_KEY}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        requests: [
+          {
+            image: {
+              source: {
+                imageUri: imageUrl,
+              },
+            },
+            features: [
+              {
+                type: 'LABEL_DETECTION',
+                maxResults: 5,
+              },
+            ],
+          },
+        ],
+      }),
+    });
+    const data = await response.json();
+    const labels = data.responses[0].labelAnnotations.map((label) => label.description.toLowerCase());
+    const itemName = labels.find((label) => !allergenItems.includes(label));
+    setItemName(itemName);
+  };
 
   return (
     <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
