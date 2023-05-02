@@ -26,6 +26,11 @@ export default function FoodCard(props) {
                 ) : (
                     <h6 className="fw-bold text-danger">Out of stock</h6>
                 )}
+                {props.item.allergens.length > 0 ? (
+                    <h6>Allergens: {props.item.allergens.join(', ')}</h6>
+                ) : (
+                    <h6 className="fw-bold text-danger"></h6>
+                )}
 
                 <button className='btn btn-info' onClick={triggerEdit}>Edit</button>
 

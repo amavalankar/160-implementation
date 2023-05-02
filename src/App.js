@@ -12,7 +12,6 @@ import AddModal from './components/AddModal';
 import SearchFilter from './components/SearchFilter';
 
 function App() {
-  const [items, setItems] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editItem, setEditItem] = useState('');
@@ -61,7 +60,7 @@ function App() {
 
 
         <div className="row">
-          {/* <div className="my-2">
+          <div className="my-2">
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
               Add Item
             </button>
@@ -73,7 +72,7 @@ function App() {
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
               Inventory Properties
             </button>
-          </div> */}
+          </div>
 
           <nav class="navbar">
             <SearchFilter callback={getSearchQuery} value={query} />
