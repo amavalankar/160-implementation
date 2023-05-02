@@ -9,10 +9,12 @@ import { FoodItemCards } from './components/GetFoodItems';
 import { useState } from 'react';
 import EditModal from './components/EditModal';
 import AddModal from './components/AddModal';
+import SearchFilter from './components/SearchFilter';
 
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [query, setQuery] = useState('');
 
   const handleShowAddModal = () => {
     if (!showEditModal) {
@@ -24,6 +26,10 @@ function App() {
     if (!showAddModal) {
       setShowEditModal(true);
     }
+  }
+
+  const getSearchQuery = (input) => {
+    setQuery(input)
   }
 
   return (
@@ -38,7 +44,7 @@ function App() {
         <div className="">
           <div className="row">
             <div className="col">
-              <h1 className="" style={{ fontWeight: "220", fontSize: "55px", paddingBottom: "10px", borderBottom: "solid black 0.5px" }}> Inventory Management</h1>
+              <h1 className="pt-4 fw-semibold" style={{ fontWeight: "220", fontSize: "55px", paddingBottom: "10px", borderBottom: "solid black 0.5px" }}> Inventory Management</h1>
             </div>
           </div>
         </div>
@@ -47,64 +53,31 @@ function App() {
 
 
         <div className="row">
+            <div className="my-2">
+              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
+                Add Item
+              </button>
 
-          {/*Left button pannel */}
-          <div className="col-3">
+              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+                Edit Item
+              </button>
 
-            <div className="row" style={{ paddingTop: "80px" }}>
-              <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
-                  Add Item
-                </button>
-              </div>
+              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+                Scan Items
+              </button>
 
-              <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
-                  Edit Item
-                </button>
-              </div>
+              <button className="btn btn-primary btn-lg m-1" style={{backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+                Inventory Properties
+              </button>
             </div>
 
-            <div className="row my-5" style={{ paddingTop: "100px" }}>
-              <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
-                  Upload Items
-                </button>
-              </div>
-
-              <div className="my-2">
-                <button className="btn btn-primary rounded-box" style={{ width: 200, height: 50, fontSize: 18, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
-                  Inventory Properties
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-
-
-          {/*Food item grid*/}
-          <div className="col">
-
-            {/*Search and filter bar*/}
             <nav class="navbar">
-              <div class="container-fluid">
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                  <img src="https://cdn1.iconfinder.com/data/icons/round-web-icons/100/rwi-44-512.png" style={{ maxHeight: 40 }} alt="Filter"></img>
-
-                </form>
-              </div>
+              <SearchFilter callback={getSearchQuery} value={query} />
             </nav>
 
-
             <div className="text-center" >
-              <FoodItemCards />
+              <FoodItemCards searchFilter={query} />
             </div>
-          </div>
         </div>
 
         <AddModal showModal={showAddModal} onClose={() => setShowAddModal(false)} />

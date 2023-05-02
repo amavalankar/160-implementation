@@ -15,11 +15,14 @@ import { db } from '../firebase/firebase.js';
 import { collection, onSnapshot } from "firebase/firestore";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PlaceholderCard from './PlaceholderCard.js';
+import { Search } from'react-bootstrap-icons'
+import FoodCard from './FoodCard.js';
 
 
-export function FoodItemCards() {
+export function FoodItemCards(props) {
     const defaultState = 'loading'
     const [data, setData] = useState(defaultState);
+    const [doFilter, setDoFilter] = useState(false)
 
     useEffect(() => {
         onSnapshot(
@@ -28,8 +31,8 @@ export function FoodItemCards() {
                 console.log(snapshot)
                 const items = snapshot.docs.map((doc) => doc.data());
                 console.log(items)
+                setData(items);
 
-                setData(items)
             },
             (error) => {
                 console.error(error);
@@ -38,53 +41,58 @@ export function FoodItemCards() {
 
     }, []);
 
+
+    useEffect(() => {
+        if (props.searchFilter.length >= 3) {
+            setDoFilter(true)
+        } else {
+            setDoFilter(false)
+        }
+    }, [props.searchFilter]);
+
     if (data == defaultState) {
         return (
-            <div className="row">
-
+            <div className="row mb-5">
                 <PlaceholderCard />
                 <PlaceholderCard />
                 <PlaceholderCard />
-
-                <div className="col-6 col-md-3 gx-4">
-                    <div className="p-3 rounded rounded-4 border border-2" id="compare-one">
-                        <h2 className="text-primary placeholder-glow fw-bold mb-1">
-                            <span className="placeholder col-12 bg-primary"></span>
-                        </h2>
-                        <h4>
-                            <span className="placeholder col-8"></span>
-                        </h4>
-                    </div>
-                </div>
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
+                <PlaceholderCard />
             </div>
         );
     } else {
+        if (doFilter) {
+            const filteredItems = data.filter((item) => item.name.toLowerCase().includes(props.searchFilter.toLowerCase()))
+            return LocalItemList(filteredItems);
+        } else {
+            return LocalItemList(data);
+        }
+    }
+}
+
+function LocalItemList(inputs) {
+    if (inputs.length === 0) {
         return (
-            <div className="row">
-                {data.map((item, index) => (
-                    <div key={index} className="col-6 col-md-3 gx-4 gy-4">
-                        <div className="card shadow p-3 rounded rounded-4 border border-2" style={{ backgroundColor: item.inStock ? 'white' : '#ffabaf', width: 180, height: 230 }} id="compare-one">
-
-                            {item.image_url && <div className={item.inStock ? "text-center border rounded rounded-3" : "text-center"} >
-
-                                {item.image_url && <img className="card-img-top card-img-bottom" style={{ width: 125, filter: !item.inStock ? "saturate(10%)" : "saturate(100%)", alignItems: "center", outline: 5 }} src={item.image_url} alt={item.name} />}
-
-                            </div>}
-
-                            <h3 className="text-primary fw-bold mb-1" style={{ fontSize: 18 }}>
-                                {item.name}
-                            </h3>
-
-                            <h6>
-                                Qty: {item.quantity}
-                            </h6>
-                            {!item.inStock && <h6>Out of stock</h6>}
-
-                        </div>
-                    </div>
-                ))
-                }
-            </div >
+            <div className="py-5 text-secondary">
+                <Search className='display-3 mb-3' />
+                <h1>No items found.</h1>
+                <h5>Please check your search for typos.</h5>
+            </div>
         );
     }
+    return (
+        <div className="row mb-5">
+            {inputs.map((item, index) => (
+                <FoodCard index={index} item={item} />
+            ))
+            }
+        </div >
+    );
 }

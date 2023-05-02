@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { XCircleFill } from'react-bootstrap-icons'
 
 export default function AllergenBadge(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log('oooyu ', props.label);
-
         props.callback(props.label);
     }
 
