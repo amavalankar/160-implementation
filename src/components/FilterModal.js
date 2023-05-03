@@ -8,11 +8,33 @@ import AllergenBadge from './AllergenBadge';
 
 export default function FilterModal(props) {
   // item's reference in Cloud Firestore DB.
+  const [items, setItems] = useState([]);
   const [allergenItems, setAllergenItems] = useState([]);
   const [showGlutenFree, setShowGlutenFree] = useState(false);
   const [showSoyFree, setShowSoyFree] = useState(false);
   const [showPeanutFree, setShowPeanutFree] = useState(false);
 
+//   React.useEffect(() => {
+//     // Load the items from Firebase
+//     const unsubscribe = firebase.firestore().collection('foodItems')
+//       .onSnapshot(snapshot => {
+//         let newItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+//         // Filter the items based on the selected allergens
+//         if (showPeanutFree) {
+//           newItems = newItems.filter(item => !item.allergens.includes('peanuts'));
+//         }
+//         if (showSoyFree) {
+//           newItems = newItems.filter(item => !item.allergens.includes('soy'));
+//         }
+//         if (showGlutenFree) {
+//           newItems = newItems.filter(item => !item.allergens.includes('gluten'));
+//         }
+        
+//         setItems(newItems);
+//       });
+//     return unsubscribe;
+//   }, [showPeanutFree, showSoyFree, showGlutenFree]);
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -33,6 +55,15 @@ export default function FilterModal(props) {
 
     console.log(filteredItems)
     setAllergenItems(filteredItems)
+  }
+
+  const uncheckBoxes = () => {
+    let glutenBox = document.getElementById("glutenBox");
+    glutenBox.checked = false; 
+    let soyBox = document.getElementById("soyBox");
+    soyBox.checked = false; 
+    let peanutBox = document.getElementById("peanutBox");
+    peanutBox.checked = false; 
   }
 
   const closeSelf = () => {
@@ -77,7 +108,7 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Gluten-free</label>
-                    <input className="form-check-input" type="checkbox" name="glutenFree" checked={showGlutenFree} onChange={e => setShowGlutenFree(e.target.checked)}/>
+                    <input id="glutenBox" className="form-check-input" type="checkbox" checked={showGlutenFree} onChange={() => setShowGlutenFree(!showGlutenFree)}/>
                   </div>
                 </div>
               </div>
@@ -85,7 +116,7 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Soy-free</label>
-                    <input className="form-check-input" type="checkbox" name="soyFree" checked={showSoyFree} onChange={e => setShowSoyFree(e.target.checked)}/>
+                    <input id="soyBox" className="form-check-input" type="checkbox" checked={showSoyFree} onChange={() => setShowSoyFree(!showSoyFree)}/>
                   </div>
                 </div>
               </div>
@@ -93,21 +124,13 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Peanut-free</label>
-                    <input className="form-check-input" type="checkbox" name="peanutFree" checked={showPeanutFree} onChange={e => setShowPeanutFree(e.target.checked)}/>
+                    <input id="peanutBox" className="form-check-input" type="checkbox" checked={showPeanutFree} onChange={() => setShowPeanutFree(!showPeanutFree)}/>
                   </div>
                 </div>
               </div>
-
-
-              {/* <InputMultiple onValueChange={getAllergens}></InputMultiple> */}
-
-              {/* {allergenItems.map((allergen, index) => (
-                <AllergenBadge key={index} label={allergen} callback={removeAllergen} />
-              ))} */}
-
               <hr />
 
-              <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Reset</button>
+              <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={uncheckBoxes}>Reset</button>
               <button type='button' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">View Results</button>
             </form>
 

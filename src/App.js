@@ -51,7 +51,7 @@ function App() {
         <div className="">
           <div className="row">
             <div className="col">
-              <h1 className="pt-4 fw-semibold" style={{ fontWeight: "220", fontSize: "55px", paddingBottom: "10px", borderBottom: "solid black 0.5px" }}> Inventory Management</h1>
+              <h1 className="pt-4 fw-semibold" style={{ fontWeight: "220", fontSize: "55px", paddingBottom: "10px", borderBottom: "solid black 0.5px" }}> BNC Food Pantry Inventory</h1>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@ function App() {
 
 
         <div className="row">
-          <div className="my-2">
+          {/* <div className="my-2">
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowAddModal}>
               Add Item
             </button>
@@ -72,7 +72,7 @@ function App() {
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
               Inventory Properties
             </button>
-          </div>
+          </div> */}
 
           <nav class="navbar">
             <SearchFilter callback={getSearchQuery} value={query} />
