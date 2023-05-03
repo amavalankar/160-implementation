@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { addDoc, collection, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
+import ImgUploading from '../ImgUploading';
+import { exportUrl } from '../ImgUploading';
 
 export default function AddModal(props) {
   // item's reference in Cloud Firestore DB.
@@ -106,6 +108,9 @@ export default function AddModal(props) {
               <div className="form-floating mb-3">
                 <input type="text" className="form-control" name="image_url" />
                 <label htmlFor="image_url">Image URL</label>
+                <ImgUploading>
+                </ImgUploading>
+                <p>{exportUrl}</p>
               </div>
 
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
@@ -136,7 +141,7 @@ function pushData(data) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: data.image_url
+    image_url: exportUrl//data.image_url
   });
 }
 

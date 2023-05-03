@@ -2,10 +2,12 @@ import { useState } from "react"
 import { storage } from "./firebase/firebase.js"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 
-
+var exportUrl = ""
 function ImgUploading() {
   const [file, setFile] = useState("");
-  const [percent, setPercent] = useState(0)
+  const [percent, setPercent] = useState(0);
+  const [savedUrl, setUrl] = useState("");
+  exportUrl = savedUrl
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -32,6 +34,7 @@ function ImgUploading() {
 
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log(url);
+          setUrl(url);
         });
       }
     );
@@ -41,10 +44,11 @@ function ImgUploading() {
   return (
     <div className="ImgUploading">
       <input type="file" accept="image/*" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload to Firebase</button>
+      <button type="button" onClick={handleUpload}>Upload to Firebase</button>
       <p>{percent} "% done"</p>
     </div>
   );
 }
 
 export default ImgUploading;
+export { exportUrl };
