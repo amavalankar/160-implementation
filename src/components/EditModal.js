@@ -8,14 +8,16 @@ import AllergenBadge from './AllergenBadge';
 
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
+
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
   const [itemName, setItemName] = useState(props.editItem.itemName || '');
   const [dailyLimit, setDailyLimit] = useState(props.editItem.limitPerDay || '');
   const [personalLimit, setPersonalLimit] = useState(props.editItem.limitPerPerson || '');
   const [quantity, setQuantity] = useState(props.editItem.quantity || '');
-  const [_, setInStock] = useState(props.editItem.inStock || '');
-  const inStock = props.editItem.inStock ? true : false
+  const [inStock, setInStock] = useState(props.editItem.inStock || '');
+  //const inStock = props.editItem.inStock ? true : false
+  var inStockProps = props.editItem.inStock
   const [imageUrl, setImageUrl] = useState(props.editItem.image_url || '');
 
   useEffect(() => {
@@ -30,7 +32,11 @@ export default function EditModal(props) {
       setQuantity(props.editItem.quantity);
       setInStock(props.editItem.inStock);
       setImageUrl(props.editItem.image_url);
+
     }
+
+    document.getElementById("checkBoxStock").checked = props.editItem.inStock
+
   }, [props.editItem]);
 
   const getAllergens = (value) => {
@@ -42,6 +48,7 @@ export default function EditModal(props) {
   };
 
   const removeAllergen = (value) => {
+
     var filteredItems = [];
 
     allergenItems.forEach((item) => {
@@ -56,8 +63,10 @@ export default function EditModal(props) {
 
   const closeSelf = () => {
     setAllergenItems([]);
+    document.getElementById("checkBoxStock").checked = inStockProps
 
     props.onClose();
+
   }
 
   const handleSubmit = (e) => {
@@ -81,6 +90,7 @@ export default function EditModal(props) {
     deleteSelf(props.editItem.id);
     props.onClose();
   }
+  console.log("at start: " + inStock)
 
   return (
     <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
@@ -124,7 +134,8 @@ export default function EditModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">In stock</label>
-                    <input id="checkBoxStock" className="form-check-input" type="checkbox" name="inStock" defaultChecked={inStock} value={inStock} onChange={e => setInStock(e.target.value)} />
+
+                    <input id="checkBoxStock" className="form-check-input" type="checkbox" name="inStock" onChange={e => setInStock(e.target.value)} />
                   </div>
                 </div>
               </div>
@@ -143,9 +154,10 @@ export default function EditModal(props) {
 
               <hr />
 
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
-              <button type='submit' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">Save changes</button>
               <button type='button' style={{ marginLeft: '10px' }} className="btn btn-primary btn-danger" onClick={triggerDelete}>Delete Item</button>
+
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" style={{ marginLeft: "130px", }} onClick={closeSelf}>Cancel</button>
+              <button type='submit' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">Save changes</button>
 
             </form>
 
@@ -153,11 +165,12 @@ export default function EditModal(props) {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 
 function pushData(data, docId) {
+
   const docRef = updateDoc(doc(db, "foodItems", docId), {
     allergens: data.allergens,
     inStock: data.inStock ? true : false,
@@ -194,7 +207,7 @@ function InputMultiple(props) {
   }
 
   return (
-    <div class="input-group mb-3">
+    <div className="input-group mb-3">
       <div className="form-floating">
         <input type="text" className="form-control" name="allergen" placeholder="" value={inputValue} onChange={handleInputChange} />
         <label htmlFor="allergen">Allergen</label>

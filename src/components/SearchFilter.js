@@ -25,7 +25,7 @@ export default function SearchFilter(props) {
         setQuery(event.target.value)
         props.callback(event.target.value);
     }
-      
+
     return (
         <div class="container-fluid">
             <form class="d-flex" onSubmit={e => e.preventDefault()}>

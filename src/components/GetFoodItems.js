@@ -87,7 +87,7 @@ function LocalItemList(inputs, props) {
     return (
         <div className="row mb-5">
             {inputs.map((item, index) => (
-                <FoodCard key={index} item={item} edit={props.edit} />
+                <FoodCard key={index} item={item} edit={props.edit} isPublic={props.isPublic} />
             ))
             }
         </div>

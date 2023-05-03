@@ -27,7 +27,7 @@ function MenuNavigation() {
     case "/App":
       component = <App />
       break
-    case "./screens/PublicInven":
+    case "/PublicInven":
         component = < PublicInvenScreen />
   }
 
