@@ -6,10 +6,16 @@ import { addDoc, collection, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 
+import { storage } from '../firebase/firebase';
+const storageRef = storage.ref().child('images');
+
 export default function AddModal(props) {
   // item's reference in Cloud Firestore DB.
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
+  // const [imageFile, setImageFile] = useState(null);
+  // const [imageURL, setImageURL] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -30,13 +36,13 @@ export default function AddModal(props) {
 
     console.log(filteredItems)
     setAllergenItems(filteredItems)
-  }
+  };
 
   const closeSelf = () => {
     setAllergenItems([]);
 
     props.onClose();
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +59,27 @@ export default function AddModal(props) {
 
     setAllergenItems([]);
     e.target.reset();
-  }
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const imageName = file.name;
+    const imageRef = storageRef.child(imageName);
+    await imageRef.put(file);
+    const url = await imageRef.getDownloadURL();
+    setSelectedImage(url);
+
+    // const reader = new FileReader();
+
+    // reader.onloadend = () => {
+    //   setImageFile(file); 
+    //   setImageURL(reader.result);
+    // };
+
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
+  };
 
   return (
     <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
@@ -103,10 +129,24 @@ export default function AddModal(props) {
               </div>
 
               {/* Temporary way of inputting images through URL */}
-              <div className="form-floating mb-3">
+              {/* <div className="form-floating mb-3">
                 <input type="text" className="form-control" name="image_url" />
                 <label htmlFor="image_url">Image URL</label>
+              </div> */}
+              <div className="form-floating mb-3">
+                <input type="file" accept="image/*" className="form-control" name="image_file" onChange={handleImageUpload}/>
+                <label htmlFor="image_url">Upload Image</label>
               </div>
+              {/* <div className="form-floating mb-3">
+                <input
+                  type="file" accept="image/*" className="form-control" name="image_file" onChange={(event) => {
+                    console.log(event.target.files[0]);
+                    setSelectedImage(event.target.files[0]);
+                }}
+                />
+                <label htmlFor="image_file">Upload Image</label>
+              </div> */}
+
 
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
 
@@ -129,15 +169,22 @@ export default function AddModal(props) {
 }
 
 function pushData(data) {
-  const docRef = addDoc(collection(db, "foodItems"), {
-    allergens: data.allergens,
-    inStock: data.inStock ? true : false,
-    limitPerDay: data.dailyLimit,
-    limitPerPerson: data.personalLimit,
-    name: data.name,
-    quantity: data.stock,
-    image_url: data.image_url
-  });
+  try {
+    const docRef = addDoc(collection(db, "foodItems"), {
+      // allergens: data.allergens,
+      // inStock: data.inStock ? true : false,
+      // limitPerDay: data.dailyLimit,
+      // limitPerPerson: data.personalLimit,
+      // name: data.name,
+      // quantity: data.stock,
+      // image_url: data.image_url
+      ...data,
+      image_url: selectedImage
+    });
+    setItemRef(docRef.id);
+  } catch (error) {
+    console.error('unable to add doc (error): ', error);
+  }
 }
 
 function InputMultiple(props) {
