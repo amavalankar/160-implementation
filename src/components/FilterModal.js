@@ -1,40 +1,88 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import { useState } from 'react';
-import { addDoc, collection, setDoc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import { addDoc, collection, onSnapshot, setDoc, getFirestore, query, where } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 
 export default function FilterModal(props) {
   // item's reference in Cloud Firestore DB.
   const [items, setItems] = useState([]);
+//   const [query, setQuery] = useState(props.value);
   const [allergenItems, setAllergenItems] = useState([]);
-  const [showGlutenFree, setShowGlutenFree] = useState(false);
-  const [showSoyFree, setShowSoyFree] = useState(false);
-  const [showPeanutFree, setShowPeanutFree] = useState(false);
+  const [glutenFree, setGlutenFree] = useState(false);
+  const [soyFree, setSoyFree] = useState(false);
+  const [peanutFree, setPeanutFree] = useState(false);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-//   React.useEffect(() => {
-//     // Load the items from Firebase
-//     const unsubscribe = firebase.firestore().collection('foodItems')
-//       .onSnapshot(snapshot => {
-//         let newItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-//         // Filter the items based on the selected allergens
-//         if (showPeanutFree) {
-//           newItems = newItems.filter(item => !item.allergens.includes('peanuts'));
-//         }
-//         if (showSoyFree) {
-//           newItems = newItems.filter(item => !item.allergens.includes('soy'));
-//         }
-//         if (showGlutenFree) {
-//           newItems = newItems.filter(item => !item.allergens.includes('gluten'));
-//         }
-        
-//         setItems(newItems);
-//       });
-//     return unsubscribe;
-//   }, [showPeanutFree, showSoyFree, showGlutenFree]);
+  React.useEffect(() => {
+    const itemsRef = collection(db, "foodItems");
+    let allergensFilter = [];
+
+    if (peanutFree) {
+      allergensFilter.push("Peanuts");
+    }
+
+    if (soyFree) {
+      allergensFilter.push("Soy");
+    }
+
+    if (glutenFree) {
+      allergensFilter.push("Gluten");
+    }
+
+    const q = query(
+      itemsRef,
+      allergensFilter.length > 0
+        ? where("allergens", "array-contains-any", allergensFilter)
+        : null
+    );
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const items = [];
+
+      querySnapshot.forEach((doc) => {
+        items.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+
+      setFilteredItems(items);
+    });
+
+    return () => unsubscribe();
+  }, [peanutFree, soyFree, glutenFree]);
+
+  function handleFilter() {
+    let itemsRef = collection(db, 'foodItems');
+  
+    if (peanutFree) {
+        const filtered = items
+        .filter(item => item !== null && item.name)
+        .filter(item => {
+          const query = query.toLowerCase();
+          return (
+            itemsRef = itemsRef.where('allergens', 'not-in', ['Peanuts'])
+          );
+        });
+      
+    }
+  
+    if (soyFree) {
+      itemsRef = itemsRef.where('allergens', 'not-in', ['Soy']);
+    }
+  
+    if (glutenFree) {
+      itemsRef = itemsRef.where('allergens', 'not-in', ['Gluten']);
+    }
+  
+    // itemsRef.get().then((querySnapshot) => {
+    //   // Process the results of the query here
+    // });
+  }
+
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -43,19 +91,6 @@ export default function FilterModal(props) {
       console.log(allergenItems);
     }
   };
-
-  const removeAllergen = (value) => {
-    var filteredItems = [];
-
-    allergenItems.forEach((item) => {
-      if (!(item == value)) {
-        filteredItems.push(item);
-      }
-    });
-
-    console.log(filteredItems)
-    setAllergenItems(filteredItems)
-  }
 
   const uncheckBoxes = () => {
     let glutenBox = document.getElementById("glutenBox");
@@ -95,7 +130,12 @@ export default function FilterModal(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Filter Items</h5>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeSelf}></button>
+            <button type="button" 
+            className="btn-close" 
+            data-bs-dismiss="modal" 
+            aria-label="Close" 
+            onClick={closeSelf}
+            ></button>
           </div>
           <div className="modal-body">
             <p></p>
@@ -108,7 +148,13 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Gluten-free</label>
-                    <input id="glutenBox" className="form-check-input" type="checkbox" checked={showGlutenFree} onChange={() => setShowGlutenFree(!showGlutenFree)}/>
+                    <input id="glutenBox" 
+                    className="form-check-input" 
+                    type="checkbox" 
+                    checked={glutenFree} 
+                    onChange={(e) => setGlutenFree(e.target.checked)}
+                    // onChange={() => setGlutenFree(!glutenFree)}
+                    />
                   </div>
                 </div>
               </div>
@@ -116,7 +162,7 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Soy-free</label>
-                    <input id="soyBox" className="form-check-input" type="checkbox" checked={showSoyFree} onChange={() => setShowSoyFree(!showSoyFree)}/>
+                    <input id="soyBox" className="form-check-input" type="checkbox" checked={soyFree} onChange={() => setSoyFree(!soyFree)}/>
                   </div>
                 </div>
               </div>
@@ -124,14 +170,14 @@ export default function FilterModal(props) {
                 <div className="col">
                   <div className="form-check form-check-inline">
                     <label className="form-check-label" htmlFor="inStock">Peanut-free</label>
-                    <input id="peanutBox" className="form-check-input" type="checkbox" checked={showPeanutFree} onChange={() => setShowPeanutFree(!showPeanutFree)}/>
+                    <input id="peanutBox" className="form-check-input" type="checkbox" checked={peanutFree} onChange={(e) => setPeanutFree(e.target.checked)}/>
                   </div>
                 </div>
               </div>
               <hr />
 
               <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={uncheckBoxes}>Reset</button>
-              <button type='button' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">View Results</button>
+              <button type='button' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleFilter} className="btn btn-primary">View Results</button>
             </form>
 
           </div>
