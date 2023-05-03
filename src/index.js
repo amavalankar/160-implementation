@@ -5,6 +5,7 @@ import App from './App';
 import MenuNavigation from './MenuNavigation';
 import reportWebVitals from './reportWebVitals';
 import MenuBNC from './components/MenuBNC';
+import ImgUploading from './ImgUploading';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
