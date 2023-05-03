@@ -7,15 +7,18 @@ import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 
 import { storage } from '../firebase/firebase';
+
 const storageRef = storage.ref().child('images');
+
+
 
 export default function AddModal(props) {
   // item's reference in Cloud Firestore DB.
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
-  // const [imageFile, setImageFile] = useState(null);
-  // const [imageURL, setImageURL] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageRef, setImageRef] = useState(null);
+
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -52,12 +55,20 @@ export default function AddModal(props) {
 
     const formJson = Object.fromEntries(formData.entries());
     formJson.allergens = allergenItems;
+    
+    if (imageRef) {
+      const imageUrl = imageRef.getDownloadURL();
+      formJson.image_url = imageUrl;
+    }
+    
     pushData(formJson);
     console.log(formJson)
 
     props.onClose();
 
     setAllergenItems([]);
+    setSelectedImage(null);
+    setImageRef(null);
     e.target.reset();
   };
 
@@ -68,17 +79,7 @@ export default function AddModal(props) {
     await imageRef.put(file);
     const url = await imageRef.getDownloadURL();
     setSelectedImage(url);
-
-    // const reader = new FileReader();
-
-    // reader.onloadend = () => {
-    //   setImageFile(file); 
-    //   setImageURL(reader.result);
-    // };
-
-    // if (file) {
-    //   reader.readAsDataURL(file);
-    // }
+    setImageRef(imageRef);
   };
 
   return (
@@ -133,10 +134,10 @@ export default function AddModal(props) {
                 <input type="text" className="form-control" name="image_url" />
                 <label htmlFor="image_url">Image URL</label>
               </div> */}
-              <div className="form-floating mb-3">
+              {/* <div className="form-floating mb-3">
                 <input type="file" accept="image/*" className="form-control" name="image_file" onChange={handleImageUpload}/>
                 <label htmlFor="image_url">Upload Image</label>
-              </div>
+              </div> */}
               {/* <div className="form-floating mb-3">
                 <input
                   type="file" accept="image/*" className="form-control" name="image_file" onChange={(event) => {
@@ -146,6 +147,11 @@ export default function AddModal(props) {
                 />
                 <label htmlFor="image_file">Upload Image</label>
               </div> */}
+              <div className="form-floating mb-3">
+                <input type="file" accept="image/*" className="form-control" name="image_file" onChange={handleImageUpload} />
+                <label htmlFor="image_file">Upload Image</label>
+              </div>
+
 
 
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
