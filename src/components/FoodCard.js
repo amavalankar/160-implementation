@@ -7,7 +7,7 @@ export default function FoodCard(props) {
 
     return (
         <div key={props.item.id} className="col-6 col-md-4 col-lg-3 col-xl-2 gx-4 gy-4">
-            <div className="p-3 rounded rounded-4 border border-2 shadow shadow-sm" style={{ backgroundColor: props.item.inStock ? 'white' : '#ffd1d3' }} id="compare-one">
+            <div className="p-3 rounded rounded-4 border border-2 shadow shadow-sm" style={{ backgroundColor: props.item.inStock ? 'white' : '#ffd1d3', height: 350 }} id="compare-one">
 
                 {props.item.image_url &&
 
