@@ -17,7 +17,7 @@ export default function FoodCard(props) {
 
                     </div>}
 
-                <h3 className="text-primary fw-bold mb-1" style={{ fontSize: 18 }}>
+                <h3 className="text-primary fw-bold mb-1" style={{ fontSize: 18, }}>
                     {props.item.name}
                 </h3>
 
@@ -27,7 +27,8 @@ export default function FoodCard(props) {
                     <h6 className="fw-bold text-danger">Out of stock</h6>
                 )}
 
-                <button className='btn btn-info btn-light rounded-4 border' style={{}} onClick={triggerEdit}>Edit</button>
+                <button className='btn btn-info btn-light  text-center' style={{}} onClick={triggerEdit}> <img style={{ maxWidth: "20px" }} src="https://cdn-icons-png.flaticon.com/512/1827/1827951.png" ></img>
+                </button>
 
             </div>
         </div>
