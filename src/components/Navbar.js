@@ -17,10 +17,11 @@ function Navbar() {
 
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
+              <img style={{width:50, height: 50, marginRight: 50}} src="https://basicneeds.berkeley.edu/sites/default/files/styles/openberkeley_image_full/public/general/bnc_color_logo-teal_bnc_3.png?itok=um0UUS_j&c=c04f838d7a8d5f79cc3052e263d0d8f5&timestamp=1661380655"></img>
               <a className="nav-item nav-link" href="/MenuBNC">Dashboard</a>
               <a className="nav-item nav-link active" href="/App">Inventory</a>
-              <a className="nav-item nav-link" href="#">Manage Listing</a>
-              <a className="nav-item nav-link" href="#">Data Analytics</a>
+              {/* <a className="nav-item nav-link" href="#">Manage Listing</a> */}
+              {/* <a className="nav-item nav-link" href="#">Data Analytics</a> */}
               <a className="nav-item nav-link" href="/PublicInven">Public Inventory</a>
 
 

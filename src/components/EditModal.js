@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import { updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
+import ImgUploading from '../ImgUploading';
+import { exportUrl } from '../ImgUploading';
+
+var originalUrl = ""
 
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
@@ -20,6 +24,7 @@ export default function EditModal(props) {
   var inStockProps = props.editItem.inStock
   const [imageUrl, setImageUrl] = useState(props.editItem.image_url || '');
 
+
   useEffect(() => {
     if (props.editItem.allergens) {
       setAllergenItems(props.editItem.allergens)
@@ -32,6 +37,7 @@ export default function EditModal(props) {
       setQuantity(props.editItem.quantity);
       setInStock(props.editItem.inStock);
       setImageUrl(props.editItem.image_url);
+      originalUrl = props.editItem.image_url;
 
     }
 
@@ -77,7 +83,7 @@ export default function EditModal(props) {
 
     const formJson = Object.fromEntries(formData.entries());
     formJson.allergens = allergenItems;
-    pushData(formJson, props.editItem.id);
+    pushData(formJson, props.editItem.id, props.editItem.imageUrl);
     console.log(formJson)
 
     props.onClose();
@@ -140,17 +146,24 @@ export default function EditModal(props) {
                 </div>
               </div>
 
+              {/* Temporary way of inputting images through URL */}
+              <div className="form-floating mb-3">
+
+                {/*<input type="text" className="form-control" name="image_url" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
+                <label htmlFor="image_url">Image URL</label> */}
+
+
+
+
+              </div>
+
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
 
               {allergenItems.map((allergen, index) => (
                 <AllergenBadge key={index} label={allergen} callback={removeAllergen} />
               ))}
 
-              {/* Temporary way of inputting images through URL */}
-              <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="image_url" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
-                <label htmlFor="image_url">Image URL</label>
-              </div>
+
 
               <hr />
 
@@ -169,7 +182,7 @@ export default function EditModal(props) {
   );
 }
 
-function pushData(data, docId) {
+function pushData(data, docId, obtainedUrl) {
 
   const docRef = updateDoc(doc(db, "foodItems", docId), {
     allergens: data.allergens,
@@ -178,7 +191,7 @@ function pushData(data, docId) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: data.image_url
+    // image_url: exportUrl //data.image_url
   });
 }
 

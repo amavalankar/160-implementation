@@ -194,8 +194,8 @@ function MenuBNC() {
                           </div>
                           <div class="col-md-8 align-items-center">
                             <div class="card-body text-center">
-                              <a href="" style={{ textDecoration: "none" }}>
-                                <h5 class="card-title" id="queueButtonTitle">Manage Listing</h5>
+                              <a href="/PublicInven" style={{ textDecoration: "none" }}>
+                                <h5  class="card-title" id="queueButtonTitle">Public Inventory View</h5>
                               </a>
                             </div>
                           </div>

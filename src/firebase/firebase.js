@@ -2,7 +2,7 @@
 import { initializeApp} from "firebase/app";
 import { getFirestore, query, collection, doc, onSnapshot } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
+import { getStorage } from "firebase/storage";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -22,6 +22,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const itemCollection = query(collection(db, "foodItems"));
+const storage = getStorage(app);
 
-export { app, db, itemCollection}
+export { storage, app, db }

@@ -8,23 +8,31 @@ import Navbar from './components/Navbar.js';
 import { FoodItemCards } from './components/GetFoodItems';
 import { useState } from 'react';
 import EditModal from './components/EditModal';
+import ScanModal from './components/ScanModal';
 import AddModal from './components/AddModal';
 import SearchFilter from './components/SearchFilter';
 
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showScanModal, setShowScanModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editItem, setEditItem] = useState('');
   const [query, setQuery] = useState('');
 
   const handleShowAddModal = () => {
-    if (!showEditModal) {
+    if (!showEditModal && !showScanModal) {
       setShowAddModal(true);
     }
   }
 
+  const handleShowScanItems = () => {
+    if (!showAddModal && !showEditModal) {
+      setShowScanModal(true);
+    }
+  }
+
   const handleShowEditModal = (item) => {
-    if (!showAddModal) {
+    if (!showAddModal && !showScanModal) {
       setEditItem(item)
       setShowEditModal(true);
     }
@@ -67,13 +75,15 @@ function App() {
               Add Item
             </button>
 
-            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowScanItems}>
               Scan Items
             </button>
 
+            {/*
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
               Inventory Properties
             </button>
+            */}
 
           </div>
 
@@ -90,6 +100,7 @@ function App() {
         </div>
 
         <AddModal showModal={showAddModal} onClose={() => setShowAddModal(false)} />
+        <ScanModal showModal={showScanModal} onClose={() => setShowScanModal(false)} />
         <EditModal showModal={showEditModal} editItem={editItem} onClose={() => setShowEditModal(false)} />
       </div>
 
