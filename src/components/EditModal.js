@@ -7,11 +7,8 @@ import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 import ImgUploading from '../ImgUploading';
 import { exportUrl } from '../ImgUploading';
-import { exportStartedUpload } from '../ImgUploading';
 
 var originalUrl = ""
-
-var updatedStartedUpload = false;
 
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
@@ -154,8 +151,7 @@ export default function EditModal(props) {
 
                 {/*<input type="text" className="form-control" name="image_url" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
                 <label htmlFor="image_url">Image URL</label> */}
-                <ImgUploading>
-                </ImgUploading>
+
 
 
 
@@ -195,7 +191,7 @@ function pushData(data, docId, obtainedUrl) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: true ? exportUrl : originalUrl //data.image_url
+    // image_url: exportUrl //data.image_url
   });
 }
 

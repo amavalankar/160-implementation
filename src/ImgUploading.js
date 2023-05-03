@@ -79,7 +79,7 @@ function ImgUploading(props) {
 
       <input type="file" accept="image/*" onChange={handleChange} />
       <button className="button-primary" style={{ background: "white", }} type="button" onClick={handleUpload}>Upload Image</button>
-      {startedUpload && <p>{percent}% Uploaded</p>}
+      {startedUpload && <p>{percent}% Uploaded  Please wait a few seconds after uploading.</p>}
     </div>
   );
 }

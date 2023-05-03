@@ -108,7 +108,7 @@ function pushData(jsonData, data) {
                     found = true;
                     const docRef = updateDoc(doc(db, "foodItems", data[i].id), {
                         allergens: (data[i].allergens || []),
-                        inStock: data[i].inStock ? true : false,
+                        inStock: data[i].inStock ? true : true,
                         limitPerDay: (data[i].dailyLimit || 1),
                         limitPerPerson: (data[i].personalLimit || ''),
                         name: data[i].name,
@@ -140,7 +140,7 @@ function pushData(jsonData, data) {
                     found = true;
                     const docRef = updateDoc(doc(db, "foodItems", data[i].id), {
                         allergens: (data[i].allergens || ["Gluten"]),
-                        inStock: data[i].inStock ? true : false,
+                        inStock: data[i].inStock ? true : true,
                         limitPerDay: (data[i].dailyLimit || 1),
                         limitPerPerson: (data[i].personalLimit || ''),
                         name: data[i].name,
@@ -180,7 +180,7 @@ function pushData(jsonData, data) {
                     found = true;
                     const docRef = updateDoc(doc(db, "foodItems", data[i].id), {
                         allergens: (data[i].allergens || []),
-                        inStock: data[i].inStock ? true : false,
+                        inStock: data[i].inStock ? true : true,
                         limitPerDay: (data[i].dailyLimit || 1),
                         limitPerPerson: (data[i].personalLimit || ''),
                         name: data[i].name,
