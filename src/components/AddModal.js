@@ -8,6 +8,17 @@ import AllergenBadge from './AllergenBadge';
 import ImgUploading from '../ImgUploading';
 import { exportUrl } from '../ImgUploading';
 
+var finalUrl = ""
+
+const updateFinalUrl = () => {
+  console.log("Before: finalURL:" + finalUrl)
+  console.log("Before: exportURL:" + exportUrl)
+
+  finalUrl = exportUrl;
+
+  console.log("After: finalURL:" + finalUrl)
+  console.log("After: exportURL:" + exportUrl)
+}
 export default function AddModal(props) {
   // item's reference in Cloud Firestore DB.
   const [itemRef, setItemRef] = useState('');
@@ -32,13 +43,27 @@ export default function AddModal(props) {
 
     console.log(filteredItems)
     setAllergenItems(filteredItems)
+
+
+
   }
 
   const closeSelf = () => {
     setAllergenItems([]);
 
+    console.log("Final URL before closing window is " + finalUrl)
+
+    //reset the exportUrl
+    finalUrl = "";
+
+
     props.onClose();
+
+
+
   }
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,6 +80,9 @@ export default function AddModal(props) {
 
     setAllergenItems([]);
     e.target.reset();
+
+
+
   }
 
   return (
@@ -106,11 +134,15 @@ export default function AddModal(props) {
 
               {/* Temporary way of inputting images through URL */}
               <div className="form-floating mb-3">
+                {/*}
                 <input type="text" className="form-control" name="image_url" />
                 <label htmlFor="image_url">Image URL</label>
+                */}
                 <ImgUploading>
                 </ImgUploading>
-                <p>{exportUrl}</p>
+                {/*<p>final url is {finalUrl}</p>*/}
+
+
               </div>
 
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
@@ -141,8 +173,12 @@ function pushData(data) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: exportUrl//data.image_url
+    image_url: finalUrl//exportUrl//data.image_url
   });
+  //reset the exportUrl
+  console.log("Final URL in pushdata before empty is " + finalUrl);
+  finalUrl = "";
+
 }
 
 function InputMultiple(props) {
@@ -175,3 +211,5 @@ function InputMultiple(props) {
     </div>
   );
 }
+
+export { updateFinalUrl }

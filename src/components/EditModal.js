@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 import { updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
+import ImgUploading from '../ImgUploading';
+import { exportUrl } from '../ImgUploading';
+
 
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
@@ -140,17 +143,25 @@ export default function EditModal(props) {
                 </div>
               </div>
 
+              {/* Temporary way of inputting images through URL */}
+              <div className="form-floating mb-3">
+
+                {/*<input type="text" className="form-control" name="image_url" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
+                <label htmlFor="image_url">Image URL</label> */}
+                <ImgUploading>
+                </ImgUploading>
+
+
+
+              </div>
+
               <InputMultiple onValueChange={getAllergens}></InputMultiple>
 
               {allergenItems.map((allergen, index) => (
                 <AllergenBadge key={index} label={allergen} callback={removeAllergen} />
               ))}
 
-              {/* Temporary way of inputting images through URL */}
-              <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="image_url" value={imageUrl} onChange={e => setImageUrl(e.target.value)} />
-                <label htmlFor="image_url">Image URL</label>
-              </div>
+
 
               <hr />
 
@@ -178,7 +189,7 @@ function pushData(data, docId) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: data.image_url
+    image_url: exportUrl //data.image_url
   });
 }
 
