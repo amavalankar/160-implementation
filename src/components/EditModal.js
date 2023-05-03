@@ -11,6 +11,8 @@ import { exportStartedUpload } from '../ImgUploading';
 
 var originalUrl = ""
 
+var updatedStartedUpload = false;
+
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
 
@@ -193,7 +195,7 @@ function pushData(data, docId, obtainedUrl) {
     limitPerPerson: data.personalLimit,
     name: data.name,
     quantity: data.stock,
-    image_url: exportStartedUpload ? exportUrl : originalUrl //data.image_url
+    image_url: true ? exportUrl : originalUrl //data.image_url
   });
 }
 
