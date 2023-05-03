@@ -8,6 +8,9 @@ import AllergenBadge from './AllergenBadge';
 
 export default function EditModal(props) {
   // item's reference in Cloud Firestore DB.
+
+  //there is a bug where you need to first click save changes at least once and then the in-stock is proprely displaying
+
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
   const [itemName, setItemName] = useState(props.editItem.itemName || '');

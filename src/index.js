@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import MenuNavigation from './MenuNavigation';
 import reportWebVitals from './reportWebVitals';
-import MenuBNC from './MenuBNC';
+import MenuBNC from './components/MenuBNC';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MenuNavigation />
   </React.StrictMode>
 );
 
