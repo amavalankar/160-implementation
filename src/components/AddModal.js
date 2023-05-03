@@ -161,7 +161,7 @@ function InputMultiple(props) {
   }
 
   return (
-    <div class="input-group mb-3">
+    <div className="input-group mb-3">
       <div className="form-floating">
         <input type="text" className="form-control" name="allergen" placeholder="" value={inputValue} onChange={handleInputChange} />
         <label htmlFor="allergen">Allergen</label>

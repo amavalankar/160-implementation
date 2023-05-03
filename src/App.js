@@ -65,18 +65,22 @@ function App() {
               Add Item
             </button>
 
-            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
               Scan Items
             </button>
 
-            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowEditModal}>
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
               Inventory Properties
             </button>
+
           </div>
 
-          <nav class="navbar">
+
+          <nav className="navbar">
             <SearchFilter callback={getSearchQuery} value={query} />
           </nav>
+
+
 
           <div className="text-center" >
             <FoodItemCards searchFilter={query} edit={edit} />

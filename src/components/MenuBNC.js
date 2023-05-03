@@ -150,11 +150,11 @@ function MenuBNC() {
                       <div class="card  shadow-sm  rounded border ml-3 border-4" id="queueCard-0" style={{ maxWidth: "250px", maxHeight: "120px" }}>
                         <div class="row g-0">
                           <div class="col-md-4">
-                            <img src="https://www.freeiconspng.com/thumbs/camera-icon/camera-icon-21.png" id="queueButtonImage" style={{ maxHeight: "200px" }} class="img-fluid rounded-start align-text" alt="..."></img>
+                            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-camera-512.png" id="queueButtonImage" style={{ maxHeight: "200px" }} class="img-fluid rounded-start align-text" alt="..."></img>
                           </div>
                           <div class="col-md-8" style={{ lineHeight: "10px", height: "10px" }}>
                             <div class="card-body text-center align-items-center" >
-                              <a href="https://www.berkeley.edu/" style={{ textDecoration: "none" }}>
+                              <a href="" style={{ textDecoration: "none" }}>
                                 <h5 class="card-title" id="queueButtonTitle">Upload Scan</h5>
                               </a>
                             </div>
@@ -175,7 +175,7 @@ function MenuBNC() {
                         </div>
                         <div class="col-md-8 align-items-center" >
                           <div class="card-body text-center align-items-center" >
-                            <a href="https://www.berkeley.edu/" style={{ textDecoration: "none" }}>
+                            <a href="" style={{ textDecoration: "none" }}>
                               <h5 class="card-title" id="queueButtonTitle">Data Analytics</h5>
                             </a>
                           </div>
@@ -194,7 +194,7 @@ function MenuBNC() {
                           </div>
                           <div class="col-md-8 align-items-center">
                             <div class="card-body text-center">
-                              <a href="https://www.berkeley.edu/" style={{ textDecoration: "none" }}>
+                              <a href="" style={{ textDecoration: "none" }}>
                                 <h5 class="card-title" id="queueButtonTitle">Manage Listing</h5>
                               </a>
                             </div>

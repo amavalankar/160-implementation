@@ -17,7 +17,7 @@ export default function EditModal(props) {
   const [dailyLimit, setDailyLimit] = useState(props.editItem.limitPerDay || '');
   const [personalLimit, setPersonalLimit] = useState(props.editItem.limitPerPerson || '');
   const [quantity, setQuantity] = useState(props.editItem.quantity || '');
-  const [_, setInStock] = useState(props.editItem.inStock || '');
+  const [inStockOriginal, setInStock] = useState(props.editItem.inStock || '');
   const inStock = props.editItem.inStock ? true : false
   const [imageUrl, setImageUrl] = useState(props.editItem.image_url || '');
 
@@ -84,6 +84,7 @@ export default function EditModal(props) {
     deleteSelf(props.editItem.id);
     props.onClose();
   }
+  console.log("at start: " + inStock)
 
   return (
     <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
@@ -197,7 +198,7 @@ function InputMultiple(props) {
   }
 
   return (
-    <div class="input-group mb-3">
+    <div className="input-group mb-3">
       <div className="form-floating">
         <input type="text" className="form-control" name="allergen" placeholder="" value={inputValue} onChange={handleInputChange} />
         <label htmlFor="allergen">Allergen</label>
