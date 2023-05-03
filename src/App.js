@@ -77,9 +77,11 @@ function App() {
               Scan Items
             </button>
 
+            {/*
             <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} >
               Inventory Properties
             </button>
+            */}
 
           </div>
 

@@ -8,11 +8,11 @@ import ImgUploading from '../ImgUploading';
 import { exportUrl } from '../ImgUploading';
 
 export default function ScanModal(props) {
-  // item's reference in Cloud Firestore DB.
-  const [itemRef, setItemRef] = useState('');
-  const defaultState = 'loading'
-  const [data, setData] = useState(defaultState);
-  useEffect(() => {
+    // item's reference in Cloud Firestore DB.
+    const [itemRef, setItemRef] = useState('');
+    const defaultState = 'loading'
+    const [data, setData] = useState(defaultState);
+    useEffect(() => {
         onSnapshot(
             collection(db, "foodItems"),
             (snapshot) => {
@@ -37,70 +37,68 @@ export default function ScanModal(props) {
         );
 
     }, []);
-  const closeSelf = () => {
-    props.onClose();
-  }
+    const closeSelf = () => {
+        props.onClose();
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
+        const form = e.target;
+        const formData = new FormData(form);
 
-    const formJson = Object.fromEntries(formData.entries());
-    pushData(formJson, data);
-    console.log(formJson)
+        const formJson = Object.fromEntries(formData.entries());
+        pushData(formJson, data);
+        console.log(formJson)
 
-    props.onClose();
+        props.onClose();
 
-    e.target.reset();
-  }
+        e.target.reset();
+    }
 
-  return (
-    <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Scan Items</h5>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeSelf}></button>
-          </div>
-          <div className="modal-body">
-            <p></p>
+    return (
+        <div className={`modal fade ${props.showModal ? 'show d-block' : ''}`} tabIndex="-1">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Scan Items</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeSelf}></button>
+                    </div>
+                    <div className="modal-body">
+                        <p></p>
 
-            <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
 
-              {/* Temporary way of inputting images through URL */}
-              <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="image_url" />
-                <label htmlFor="image_url">Image URL</label>
-                <ImgUploading>
-                </ImgUploading>
-                <p>{exportUrl}</p>
-              </div>
+                            {/* Temporary way of inputting images through URL */}
+                            <div className="form-floating mb-3">
 
-              <hr />
+                                <ImgUploading>
+                                </ImgUploading>
+                            </div>
 
-              <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
-              <button type='submit' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">Save changes</button>
-            </form>
+                            <hr />
 
-          </div>
-        </div>
+                            <button type="button" style={{ marginLeft: '250px' }} className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeSelf}>Cancel</button>
+                            <button type='submit' style={{ marginLeft: '10px', backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} className="btn btn-primary">Save changes</button>
+                        </form>
 
-      </div>
-    </div >
-  );
+                    </div>
+                </div>
+
+            </div>
+        </div >
+    );
 }
 
 
 function pushData(jsonData, data) {
-    if (jsonData.image_url.includes("1Soup") || jsonData.image_url.includes("2Soup") || jsonData.image_url.includes("3Soup") || exportUrl.toString().includes("1Soup") || exportUrl.toString().includes("2Soup") || exportUrl.toString().includes("3Soup")) {
+    if (exportUrl.toString().includes("1Soup") || exportUrl.toString().includes("2Soup") || exportUrl.toString().includes("3Soup")) {
         var toAdd = 0;
-        if (exportUrl.toString().includes("1Soup") || jsonData.image_url.includes("1Soup")) {
+        if (exportUrl.toString().includes("1Soup")) {
             toAdd = 1;
-        } else if (exportUrl.toString().includes("2Soup") || jsonData.image_url.includes("2Soup")) {
+        } else if (exportUrl.toString().includes("2Soup")) {
             toAdd = 2;
-        } else if (exportUrl.toString().includes("3Soup") || jsonData.image_url.includes("3Soup")) {
+        } else if (exportUrl.toString().includes("3Soup")) {
             toAdd = 3;
         }
         var found = false;
@@ -166,13 +164,13 @@ function pushData(jsonData, data) {
         }
     }
 
-    if (jsonData.image_url.includes("1Ramen") || jsonData.image_url.includes("2Ramen") || jsonData.image_url.includes("3Ramen") || exportUrl.toString().includes("1Ramen") || exportUrl.toString().includes("2Ramen") || exportUrl.toString().includes("3Ramen")) {
+    if (exportUrl.toString().includes("1Ramen") || exportUrl.toString().includes("2Ramen") || exportUrl.toString().includes("3Ramen")) {
         var toAdd = 0;
-        if (exportUrl.toString().includes("1Ramen") || jsonData.image_url.includes("1Ramen")) {
+        if (exportUrl.toString().includes("1Ramen")) {
             toAdd = 1;
-        } else if (exportUrl.toString().includes("2Ramen") || jsonData.image_url.includes("2Ramen")) {
+        } else if (exportUrl.toString().includes("2Ramen")) {
             toAdd = 2;
-        } else if (exportUrl.toString().includes("3Ramen") || jsonData.image_url.includes("3Ramen")) {
+        } else if (exportUrl.toString().includes("3Ramen")) {
             toAdd = 3;
         }
         var found = false;
@@ -208,23 +206,23 @@ function pushData(jsonData, data) {
 }
 
 function InputMultiple(props) {
-  const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState('');
 
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value)
-  };
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value)
+    };
 
-  const handleButtonClick = (e) => {
-    e.preventDefault();
+    const handleButtonClick = (e) => {
+        e.preventDefault();
 
-    console.log(inputValue);
+        console.log(inputValue);
 
-    if (inputValue != '') {
-      props.onValueChange(inputValue);
-      setInputValue('');
+        if (inputValue != '') {
+            props.onValueChange(inputValue);
+            setInputValue('');
+        }
+
     }
-
-  }
 
 }

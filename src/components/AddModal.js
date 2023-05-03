@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import { useState } from 'react';
-import { addDoc, collection, setDoc } from 'firebase/firestore';
+import { addDoc, collection, setDoc, onSnapshot, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 import ImgUploading from '../ImgUploading';
@@ -23,6 +22,33 @@ export default function AddModal(props) {
   // item's reference in Cloud Firestore DB.
   const [itemRef, setItemRef] = useState('');
   const [allergenItems, setAllergenItems] = useState([]);
+  const defaultState = 'loading'
+  const [data, setData] = useState(defaultState);
+  useEffect(() => {
+    onSnapshot(
+      collection(db, "foodItems"),
+      (snapshot) => {
+        console.log(snapshot)
+
+        const docList = [];
+
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+
+          docList.push({ id, ...data })
+        })
+
+        console.log(docList)
+        setData(docList);
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+  }, []);
 
   const getAllergens = (value) => {
     const properValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
@@ -73,7 +99,7 @@ export default function AddModal(props) {
 
     const formJson = Object.fromEntries(formData.entries());
     formJson.allergens = allergenItems;
-    pushData(formJson);
+    pushData(formJson, data);
     console.log(formJson)
 
     props.onClose();
@@ -165,16 +191,36 @@ export default function AddModal(props) {
   );
 }
 
-function pushData(data) {
-  const docRef = addDoc(collection(db, "foodItems"), {
-    allergens: data.allergens,
-    inStock: data.inStock ? true : false,
-    limitPerDay: data.dailyLimit,
-    limitPerPerson: data.personalLimit,
-    name: data.name,
-    quantity: data.stock,
-    image_url: finalUrl//exportUrl//data.image_url
-  });
+function pushData(jsonData, data) {
+  var found = false;
+  for (let i = 0; i < data.length; i++) {
+    if (data[i] !== undefined) {
+      if (data[i].name == jsonData.name) {
+        found = true;
+        const docRef = updateDoc(doc(db, "foodItems", data[i].id), {
+          allergens: data[i].allergens.concat(jsonData.allergens),
+          inStock: jsonData.inStock ? true : false,
+          limitPerDay: jsonData.dailyLimit,
+          limitPerPerson: jsonData.personalLimit,
+          name: data[i].name,
+          quantity: parseInt(data[i].quantity) + parseInt(jsonData.stock),
+          image_url: finalUrl
+        });
+        break;
+      }
+    }
+  }
+  if (!found) {
+    const docRef = addDoc(collection(db, "foodItems"), {
+      allergens: jsonData.allergens,
+      inStock: jsonData.inStock ? true : false,
+      limitPerDay: jsonData.dailyLimit,
+      limitPerPerson: jsonData.personalLimit,
+      name: jsonData.name,
+      quantity: jsonData.stock,
+      image_url: finalUrl//exportUrl//data.image_url
+    });
+  }
   //reset the exportUrl
   console.log("Final URL in pushdata before empty is " + finalUrl);
   finalUrl = "";

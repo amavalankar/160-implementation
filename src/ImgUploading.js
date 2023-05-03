@@ -5,6 +5,7 @@ import AddModal from "./components/AddModal.js"
 import { updateFinalUrl } from "./components/AddModal.js"
 
 var exportUrl = ""
+var exportStartedUpload = false;
 
 
 
@@ -12,6 +13,10 @@ function ImgUploading(props) {
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
   const [savedUrl, setUrl] = useState("");
+  const [startedUpload, setStartedUpload] = useState(false);
+
+
+
   exportUrl = savedUrl
 
 
@@ -33,6 +38,7 @@ function ImgUploading(props) {
     } else {
 
 
+      setStartedUpload(true);
 
       const storageRef = ref(storage, `${file.name}`)
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -56,6 +62,8 @@ function ImgUploading(props) {
               updateFinalUrl()
 
             }, 1000);
+            setStartedUpload(true);
+            exportStartedUpload = startedUpload;
 
           });
         }
@@ -71,10 +79,10 @@ function ImgUploading(props) {
 
       <input type="file" accept="image/*" onChange={handleChange} />
       <button className="button-primary" style={{ background: "white", }} type="button" onClick={handleUpload}>Upload Image</button>
-      <p>{percent}% Uploaded</p>
+      {startedUpload && <p>{percent}% Uploaded</p>}
     </div>
   );
 }
 
 export default ImgUploading;
-export { exportUrl };
+export { exportUrl, exportStartedUpload };
