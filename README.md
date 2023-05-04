@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# CS 160 Team 4: Designing Kinder Dining 
+
+## Summary
+Our goal was to create an app for UC Berkeley’s Basic Needs Center (BNC) to improve the food pantry distribution process. 
+During contextual inquiry, we observed that the process of manually logging food inventory into the BNC’s database is inefficient and often results in inaccuracies in their system. 
+Currently, the BNC does not offer a public view of their inventory. This is a recurring pain-point for BNC users, who may be looking for specific items and get frustrated when their desired items are not available during their pantry visits.
+
+Our solution:
+* Creating a connected BNC inventory and visitor interface to improve communication and queuing system.
+
+* AI inventory entry system to automate inventory management allowing BNC team members to quickly and accurately log new food items into the inventory from invoices or pictures/videos
+
+* Public view of the BNC’s food pantry displaying available items with descriptions, quantities, and other relevant information. This public view also supports language toggles and filters for common food allergens/dietary restrictions in order to increase transparency and accessibility of use.
+
+## Running the React App
+
+To run this project, you can open the project and run `npm install`, then `npm start` which will open the site on [http://localhost:3000](http://localhost:3000)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Functionality
 
-In the project directory, you can run:
+Our project features an inventory management system which allows food items to be added along with their allergens, quantity, stock status, and images. We use Firebase to facilite the database and ReactJS for the front end interface.
 
-### `npm start`
+Our scanning feature supports input of images with multiple food items to automate inventory entry. We have provided sample images under the `sample_images` folder.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Additional notes: 
+* If there are missing module errors, delete the `node_modules` folder and re-run `npm install`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* After choosing and uploading an image, it may be nessecary to wait a few additional seconds for the image to get properly uploaded to the firebase database before clicking "Save changes".
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
