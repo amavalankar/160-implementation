@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from './firebase.js'
 

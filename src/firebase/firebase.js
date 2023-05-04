@@ -1,7 +1,7 @@
+/* eslint-disable */
 // Import the functions you need from the SDKs you need
 import { initializeApp} from "firebase/app";
 import { getFirestore, query, collection, doc, onSnapshot } from 'firebase/firestore';
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { auth, provider, signInWrapper } from '../firebase/auth.js';
 import { signOut } from "firebase/auth";

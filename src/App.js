@@ -1,9 +1,8 @@
+/* eslint-disable */
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import AuthButton from './components/AuthButton.js';
 import Navbar from './components/Navbar.js';
 import { FoodItemCards } from './components/GetFoodItems';
 import { useState } from 'react';

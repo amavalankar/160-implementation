@@ -2,8 +2,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 import { useState } from 'react';
-import { addDoc, collection, setDoc } from 'firebase/firestore';
-import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
 
 export default function AllergenInput(props) {

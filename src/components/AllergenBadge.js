@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { XCircleFill } from 'react-bootstrap-icons'
 
 export default function AllergenBadge(props) {

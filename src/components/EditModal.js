@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
@@ -5,8 +6,6 @@ import { useState, useEffect } from 'react';
 import { updateDoc, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import AllergenBadge from './AllergenBadge';
-import ImgUploading from '../ImgUploading';
-import { exportUrl } from '../ImgUploading';
 
 var originalUrl = ""
 

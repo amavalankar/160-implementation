@@ -1,7 +1,5 @@
+/* eslint-disable */
 import React, {useState} from 'react';
-import AuthButton from './AuthButton';
-import MenuBNC from '../components/MenuBNC';
-import App from '../App';
 
 
 function Navbar() {

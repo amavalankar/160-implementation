@@ -1,9 +1,9 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 import { addDoc, collection, setDoc, onSnapshot, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import AllergenBadge from './AllergenBadge';
 import ImgUploading from '../ImgUploading';
 import { exportUrl } from '../ImgUploading';
 

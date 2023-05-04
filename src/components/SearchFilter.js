@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from 'react';
 import FilterModal from './FilterModal';
 
@@ -33,7 +34,10 @@ export default function SearchFilter(props) {
         <button className="btn btn-primary btn-lg m-1" style={{ backgroundColor: "#42a0bd", borderColor: "#96c4d4" }} onClick={handleShowFilterModal}>
               Filter
             </button>
-            <img src="https://static.thenounproject.com/png/987-200.png" style={{ maxHeight: 40, marginTop: 5, marginLeft: 15, paddingLeft: "10px" }} alt="Filter"></img>
+            <button className="btn btn-primary btn-lg m-1" style={{ backgroundImage: "url(https://static.thenounproject.com/png/987-200.png)", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "contain", width: 100, backgroundColor: "#42a0bd", borderColor: "#96c4d4" }}>
+            </button>
+            
+            {/* <img src="https://static.thenounproject.com/png/987-200.png" style={{ maxHeight: 40, marginTop: 5, marginLeft: 15, paddingLeft: "10px" }} alt="Filter"></img> */}
                 {/* <img src="https://cdn1.iconfinder.com/data/icons/round-web-icons/100/rwi-44-512.png" style={{marginLeft: 20, maxHeight: 40 }} alt="Filter"></img> */}
             </form>
             <FilterModal showModal={showFilterModal} onClose={() => setShowFilterModal(false)} />

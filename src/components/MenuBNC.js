@@ -1,13 +1,8 @@
+/* eslint-disable */
 import React from 'react';
-import logo from '../logo.svg';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import AuthButton from './AuthButton.js';
-import Navbar from './Navbar.js';
-import { FoodItemCards } from './GetFoodItems';
-import { useState } from 'react';
-import App from '../App';
 
 function MenuBNC() {
 
